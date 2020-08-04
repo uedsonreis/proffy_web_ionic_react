@@ -1,7 +1,7 @@
 {
-  "name": "proffy_web_ionic_react",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react"
+    "name": "proffy_web_ionic_react",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "react"
 }
