@@ -5,7 +5,7 @@ import logoImg from '../../assets/images/logo.svg';
 
 import './styles.css';
 
-interface Props { title: string; }
+interface Props { title: string; description?: string; }
 
 export const Header: React.FC = () => {
     return (
@@ -20,12 +20,13 @@ export const Header: React.FC = () => {
     );
 }
 
-export const HeaderContent: React.FC<Props> = ({ title, children }) => {
+export const HeaderContent: React.FC<Props> = ({ title, description, children }) => {
     return (
         <IonHeader>
             <IonToolbar>                        
                 <div className="header-content">
                     <strong>{title}</strong>
+                    {description && <p>{description}</p>}
                     {children}
                 </div>
             </IonToolbar>

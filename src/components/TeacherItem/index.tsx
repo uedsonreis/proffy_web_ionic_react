@@ -1,32 +1,43 @@
 import React from 'react';
+import { IonIcon } from '@ionic/react';
+import { logoWhatsapp } from 'ionicons/icons';
 
-import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
+import { Class } from '../../domain/entities/class';
+import { Teacher } from '../../domain/entities/teacher';
 
 import './styles.css';
+import api from '../../services/api';
 
-interface Props { teacher: string, subject: string, description: string, price: number }
+interface Props { objClass: Class }
 
-const TeacherItem: React.FC<Props> = ({ teacher, subject, description, price }) => {
+const TeacherItem: React.FC<Props> = (props) => {
+
+    const { user: teacher, subject, cost } = props.objClass;
+
+    function createNewConnection() {
+        api.createNewConnection(teacher.id).then(data => console.log(data));
+    }
+
     return (
         <article className="teacher-item">
             <header>
-                <img src="https://avatars3.githubusercontent.com/u/7030518?s=460&u=6f68e22a665ea04c0353e606320cf4d934784d79&v=4" alt="Uedson Reis" />
+                <img src={teacher.avatar} alt={teacher.name} />
                 <div>
-                    <strong>{teacher}</strong>
+                    <strong>{teacher.name}</strong>
                     <span>{subject}</span>
                 </div>
             </header>
 
-            <p>{description}</p>
+            <p>{teacher.bio}</p>
 
             <footer>
                 <p>
-                    Preço / Hora <strong>R$ {price.toFixed(2)}</strong>
+                    Preço / Hora <strong>R$ {Number(cost).toFixed(2)}</strong>
                 </p>
-                <button type="button">
-                    <img src={whatsappIcon} alt="Whatsapp" />
-                    Entrar em contato
-                </button>
+                <a onClick={createNewConnection} href={`https://wa.me/${teacher.whatsapp}`} target="_blank" >
+                    <IonIcon icon={logoWhatsapp} size="large" />
+                    <span>Entrar em contato</span>
+                </a>
             </footer>
 
         </article>

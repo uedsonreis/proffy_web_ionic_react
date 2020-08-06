@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { IonContent, IonPage } from '@ionic/react';
 import { Link } from 'react-router-dom';
 
@@ -8,9 +8,17 @@ import studyIcon from '../../assets/images/icons/study.svg';
 import giveClassesIcon from '../../assets/images/icons/give-classes.svg';
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
 
+import api from '../../services/api';
+
 import './styles.css';
 
 function Landing() {
+
+    const [connections, setConnections] = useState({ total: 0 });
+
+    useEffect(() => {
+        api.getConnections().then(data => setConnections(data))
+    }, [])
 
     return (
         <IonPage className="page-landing">
@@ -38,7 +46,7 @@ function Landing() {
                     </div>
 
                     <span className="total-connections">
-                        Total de 200 conexões já realizadas
+                        Total de {connections.total} conexões já realizadas.
                         <img src={purpleHeartIcon} alt="Coração Roxo" />
                     </span>
                 </div>
