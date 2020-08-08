@@ -55,7 +55,7 @@ function StudentPage() {
                 </form>
 
                 <main>
-                    {classList.map((objClass: any) => (
+                    {classList.map(objClass => (
                         <TeacherItem key={objClass.id} objClass={objClass} />
                     ))}
                 </main>
